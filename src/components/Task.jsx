@@ -18,21 +18,17 @@ function Task(props) {
 
   useEffect(() => {
     if (run) {
-      const intervalId = setInterval(
-        () => {
-          if (percentage >= 100) {
-            clearInterval(intervalId);
-            handleRemoveTask();
-            freeServer(taskId);
-            updateQueueAndServer();
-          } else {
-            setPercentage(percentage + incrementPerSec);
-            setTime(time + 1);
-          }
-        },
-
-        1000
-      );
+      const intervalId = setInterval(() => {
+        if (percentage >= 100) {
+          clearInterval(intervalId);
+          handleRemoveTask();
+          freeServer(taskId);
+          updateQueueAndServer();
+        } else {
+          setPercentage(percentage + incrementPerSec);
+          setTime(time + 1);
+        }
+      }, 1000);
       return () => clearInterval(intervalId);
     }
   });
@@ -43,10 +39,20 @@ function Task(props) {
   };
   return (
     <div className="task-card">
-      <span>Task Id: {taskId}</span>
-      {run ? null : (
-        <button onClick={() => handleDelete(taskId)}>Delete</button>
-      )}
+      <div className="task-card-head">
+        <span>
+          <span className="primary-head">Task Id: </span>
+          <span className="secondary-head secondary-color">{taskId}</span>
+        </span>
+        {run ? null : (
+          <button
+            className="btn btn-secondary"
+            onClick={() => handleDelete(taskId)}
+          >
+            Delete
+          </button>
+        )}
+      </div>
       <div className="task-bar">
         {time === 0 ? (
           <span>Waiting...</span>

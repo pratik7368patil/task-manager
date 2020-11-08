@@ -10,19 +10,30 @@ export default function ServerCard(props) {
 
   return (
     <div className="server-card">
-      <div>
-        Running Task:{" "}
-        {server.currentRunningTask === null
-          ? "Idle"
-          : server.currentRunningTask}
+      <div className="pb-2">
+        <span className="primary-head">Running Task: </span>
+        <span className="secondary-color secondary-head">
+          {server.currentRunningTask === null
+            ? "Idle"
+            : server.currentRunningTask}
+        </span>
       </div>
       {server.id === 100 ? (
-        <div>Server Name: Default Server</div>
+        <div className="pb-2">
+          <span className="primary-head">Server Name: </span>
+          <span className="secondary-color">Default Server</span>
+        </div>
       ) : (
-        <div>Server ID: {server.id}</div>
+        <div className="pb-2">
+          <span className="primary-head">Server Id: </span>
+          <span className="secondary-color">{server.id}</span>
+        </div>
       )}
       {server.id === 100 || server.currentRunningTask !== null ? null : (
-        <button onClick={() => removeCurrentServer(server.id)}>
+        <button
+          className="btn btn-secondary"
+          onClick={() => removeCurrentServer(server.id)}
+        >
           Remove Server
         </button>
       )}

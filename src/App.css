@@ -1,3 +1,76 @@
+* {
+  font-family: sans-serif;
+}
+
 .main-container {
   display: flex;
+  height: 98vh;
+  flex-wrap: wrap;
+}
+h2 {
+  background: linear-gradient(#2b2b2b, #4f7bff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn {
+  background: #2b2b2b;
+  box-shadow: 0px -1px 10px rgba(0, 21, 33, 0.1);
+  color: white;
+  margin-left: 2px;
+  border: none;
+  border-radius: 2px;
+  padding: 5px;
+  cursor: pointer;
+  transition-property: background;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.btn:hover {
+  background-image: linear-gradient(to right, #60a6fe, #4f7bff);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn-secondary {
+  background-image: linear-gradient(to right, #60a6fe, #4f7bff);
+}
+
+.input-field {
+  padding: 5px;
+  border: 1px solid #2b2b2b;
+  border-radius: 2px;
+}
+
+.input-field:focus {
+  border: 1px solid #4f7bff;
+  outline: none;
+}
+
+.primary-color {
+  color: #2b2b2b;
+}
+
+.secondary-color {
+  color: lightgray;
+}
+
+.secondary-color-dark {
+  color: gray;
+}
+
+.primary-head {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.secondary-head {
+  font-size: 18px;
+}
+
+.pb-2 {
+  padding-bottom: 5px;
 }

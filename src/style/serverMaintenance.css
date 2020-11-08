@@ -1,5 +1,36 @@
 .server-maintenance-container {
   display: flex;
+  width: 49%;
+  height: 100%;
   flex-direction: column;
   margin: 5px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .server-maintenance-container {
+    width: 100%;
+  }
+}
+
+.server-maintenance-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+  border-bottom: 1px solid lightgray;
+}
+
+.server-maintenance-head > h2 {
+  flex-grow: 1;
+}
+
+.server-list-container-handle-scroll {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.server-list-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

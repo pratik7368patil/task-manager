@@ -13,15 +13,14 @@ export default function TaskMaintenance(props) {
     updateCurrentWorkingQueue,
     updateQueueAndServer,
     currentWorkingQueue,
+    triggerError,
   } = props;
   const [numberOfTasks, setNumberOfTasks] = React.useState(0);
 
   const handleSetNTasks = () => {
-    if (numberOfTasks === 0 || numberOfTasks === null) {
+    if (numberOfTasks <= 0 || numberOfTasks === null) {
       // update this thing to show error --> use snackbar
-      console.log(
-        "Number of Tasks should be greater than 0 and less than Memory Limit"
-      );
+      triggerError("Invalid Number of Tasks");
       return;
     }
     handleAddNTasks(numberOfTasks);
@@ -30,31 +29,40 @@ export default function TaskMaintenance(props) {
 
   return (
     <div className="task-maintenance-container">
-      <div>
-        <h4>Task maintenance</h4>
+      <div className="task-maintenance-head">
+        <h2>Task maintenance</h2>
         <div>
           <input
+            className="input-field"
             type="number"
             onChange={(event) => setNumberOfTasks(+event.target.value)}
           />
-          <button onClick={handleSetNTasks}>Add Task</button>
+          <button className="btn btn-secondary" onClick={handleSetNTasks}>
+            Add Task
+          </button>
         </div>
       </div>
-      {currentWorkingQueue.length > 0
-        ? currentWorkingQueue.map((task) => (
-            <Task
-              key={task.id}
-              taskId={task.id}
-              freeServer={freeServer}
-              updateQueueAndServer={updateQueueAndServer}
-              handleForceRemoveTask={handleForceRemoveTask}
-              handleRemoveTask={handleRemoveTask}
-              updateCurrentWorkingQueue={updateCurrentWorkingQueue}
-              runningTime={20}
-              run={task.isRunning}
-            />
-          ))
-        : "No Tasks!"}
+      <div className="task-list-container-handle-scroll">
+        <div className="task-list-container">
+          {currentWorkingQueue.length > 0 ? (
+            currentWorkingQueue.map((task) => (
+              <Task
+                key={task.id}
+                taskId={task.id}
+                freeServer={freeServer}
+                updateQueueAndServer={updateQueueAndServer}
+                handleForceRemoveTask={handleForceRemoveTask}
+                handleRemoveTask={handleRemoveTask}
+                updateCurrentWorkingQueue={updateCurrentWorkingQueue}
+                runningTime={20}
+                run={task.isRunning}
+              />
+            ))
+          ) : (
+            <div className="empty-task-alert">No Tasks</div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

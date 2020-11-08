@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import ServerMaintenance from "./components/ServerMaintenance";
 import TaskMaintenance from "./components/TaskMaintenance";
+import Snackbar from "./components/Snackbar";
 import {
   getCurrentServerList,
   getCurrentTaskList,
@@ -14,6 +15,7 @@ function App() {
     getCurrentServerList()
   );
 
+  // storing task queue
   const [currentWorkingQueue, setCurrentWorkingQueue] = React.useState([]);
 
   const updateServerList = () => {
@@ -23,9 +25,7 @@ function App() {
   // code to update task queue
 
   const updateCurrentWorkingQueue = () => {
-    const currentUpdatedQueue = [...getCurrentTaskList()];
-    console.log(currentUpdatedQueue);
-    setCurrentWorkingQueue(currentUpdatedQueue);
+    setCurrentWorkingQueue([...getCurrentTaskList()]);
   };
 
   const updateQueueAndServer = () => {
@@ -42,18 +42,35 @@ function App() {
     }
   };
 
+  // for error handling
+  const [show, setShow] = React.useState(false); // for snackbar
+  const [message, setMessage] = React.useState("");
+  const triggerError = (msg) => {
+    setShow(true);
+    setMessage(msg);
+    setTimeout(() => {
+      setShow(false);
+    }, 2000);
+  };
+  // error handling ends here
+
   return (
-    <div className="main-container">
-      <TaskMaintenance
-        updateCurrentWorkingQueue={updateCurrentWorkingQueue}
-        updateQueueAndServer={updateQueueAndServer}
-        currentWorkingQueue={currentWorkingQueue}
-      />
-      <ServerMaintenance
-        currentServerList={currentServerList}
-        updateServerList={updateServerList}
-      />
-    </div>
+    <>
+      <div className="main-container">
+        <TaskMaintenance
+          triggerError={triggerError}
+          updateCurrentWorkingQueue={updateCurrentWorkingQueue}
+          updateQueueAndServer={updateQueueAndServer}
+          currentWorkingQueue={currentWorkingQueue}
+        />
+        <ServerMaintenance
+          triggerError={triggerError}
+          currentServerList={currentServerList}
+          updateServerList={updateServerList}
+        />
+      </div>
+      <Snackbar message={message} show={show} />
+    </>
   );
 }
 
