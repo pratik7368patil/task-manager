@@ -3,7 +3,7 @@
 class Queue {
   constructor() {
     this.tasks = [];
-    this.currentEmptySlot = 0;
+    this.currentLength = 0;
     this.size = 4294967295; // this is memory limit for array 2^32-1
   }
 
@@ -12,23 +12,23 @@ class Queue {
       return "Queue is Full!";
     }
     this.tasks.push(task);
-    this.currentEmptySlot += 1;
+    this.currentLength += 1;
   }
 
   removeTask() {
-    if (this.currentEmptySlot === 0) {
+    if (this.currentLength === 0) {
       return "Queue is Empty";
     }
     this.tasks = this.tasks.slice(1);
-    this.currentEmptySlot -= 1;
+    this.currentLength -= 1;
   }
 
-  forceRemoveTask(id) {
-    if (this.currentEmptySlot === 0) {
+  forceRemoveTask(taskId) {
+    if (this.currentLength === 0) {
       return "Queue is Empty";
     }
-    this.tasks = this.tasks.filter((task) => task.id !== id);
-    this.currentEmptySlot -= 1;
+    this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    this.currentLength -= 1;
   }
 
   updateTaskStatus(taskId) {
@@ -42,14 +42,14 @@ class Queue {
   }
 
   frontTask() {
-    if (this.currentEmptySlot === 0) {
+    if (this.currentLength === 0) {
       return "Queue is Empty";
     }
     return this.tasks[0];
   }
 
   isFull() {
-    if (this.currentEmptySlot === 4294967295) {
+    if (this.currentLength === this.size) {
       return true;
     }
     return false;
@@ -60,7 +60,7 @@ class Queue {
   }
 
   getQueueLength() {
-    return this.currentEmptySlot;
+    return this.currentLength;
   }
 }
 
@@ -69,7 +69,7 @@ class Queue {
 class Server {
   constructor() {
     this.serverList = [{ id: 100, currentRunningTask: null }]; // default server ID 100
-    this.currentEmptySlot = 1;
+    this.currentLength = 1;
     this.size = 10;
   }
 
@@ -78,21 +78,22 @@ class Server {
       return "Server List is full!";
     }
     this.serverList.push(server);
-    this.currentEmptySlot += 1;
+    this.currentLength += 1;
   }
 
   removeThisServer(id) {
-    if (this.currentEmptySlot === 0) {
+    if (this.currentLength === 0) {
       return "Empty Server List!";
     }
     this.serverList = this.serverList.filter((server) => server.id !== id);
-    this.currentEmptySlot -= 1;
+    this.currentLength -= 1;
   }
 
   assignTaskToServer(taskId) {
-    for (let i = 0; i < this.serverList.length; i++) {
-      if (this.serverList[i].currentRunningTask === null) {
-        this.serverList[i].currentRunningTask = taskId;
+    // itr is a iterator
+    for (let itr = 0; itr < this.serverList.length; itr++) {
+      if (this.serverList[itr].currentRunningTask === null) {
+        this.serverList[itr].currentRunningTask = taskId;
         return;
       }
     }
@@ -109,7 +110,7 @@ class Server {
   }
 
   isFull() {
-    if (this.currentEmptySlot === this.size) {
+    if (this.currentLength === this.size) {
       return true;
     }
     return false;
@@ -117,6 +118,10 @@ class Server {
 
   getServerList() {
     return this.serverList;
+  }
+
+  getDefaultServerId() {
+    return this.serverList[0].id;
   }
 }
 

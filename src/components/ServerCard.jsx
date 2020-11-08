@@ -1,5 +1,6 @@
 import React from "react";
 import "./../style/serverCard.css";
+import { DEFAULT_SERVER_CODE } from "./../utilities/utilities.js";
 
 export default function ServerCard(props) {
   const { handleRemoveServer, server, updateServerList } = props;
@@ -18,7 +19,7 @@ export default function ServerCard(props) {
             : server.currentRunningTask}
         </span>
       </div>
-      {server.id === 100 ? (
+      {server.id === DEFAULT_SERVER_CODE ? (
         <div className="pb-2">
           <span className="primary-head">Server Name: </span>
           <span className="secondary-color">Default Server</span>
@@ -29,7 +30,8 @@ export default function ServerCard(props) {
           <span className="secondary-color">{server.id}</span>
         </div>
       )}
-      {server.id === 100 || server.currentRunningTask !== null ? null : (
+      {server.id === DEFAULT_SERVER_CODE ||
+      server.currentRunningTask !== null ? null : (
         <button
           className="btn btn-secondary"
           onClick={() => removeCurrentServer(server.id)}

@@ -49,3 +49,9 @@
   font-size: 22px;
   font-weight: bold;
 }
+
+@media only screen and (max-width: 600px) {
+  .empty-task-alert {
+    width: 100%;
+  }
+}

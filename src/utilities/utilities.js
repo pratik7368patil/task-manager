@@ -10,6 +10,7 @@ const taskScheduler = new Queue();
 
 const handleAddNTasks = function (numberOfTasks) {
   for (let itr = 0; itr < +numberOfTasks; itr++) {
+    // itr is a iterator
     taskScheduler.addTask({ id: generateId(), isRunning: false });
   }
 };
@@ -29,6 +30,8 @@ const handleForceRemoveTask = function (id) {
 // server utilities
 const serverHandler = new Server();
 
+const DEFAULT_SERVER_CODE = serverHandler.getDefaultServerId();
+
 const handleAddServer = function () {
   serverHandler.addNewServer({ id: generateId(), currentRunningTask: null });
 };
@@ -45,8 +48,8 @@ const getCurrentServerList = function () {
 
 const findIdleServer = function () {
   const serverList = getCurrentServerList();
-  for (let i = 0; i < serverList.length; i++) {
-    if (serverList[i].currentRunningTask === null) {
+  for (let itr = 0; itr < serverList.length; itr++) {
+    if (serverList[itr].currentRunningTask === null) {
       return true;
     }
   }
@@ -58,9 +61,9 @@ const findWaitingTask = function () {
     return null;
   }
   const queueList = getCurrentTaskList();
-  for (let i = 0; i < queueList.length; i++) {
-    if (queueList[i].isRunning === false) {
-      return queueList[i].id;
+  for (let itr = 0; itr < queueList.length; itr++) {
+    if (queueList[itr].isRunning === false) {
+      return queueList[itr].id;
     }
   }
 
@@ -83,6 +86,7 @@ const freeServer = function (taskId) {
 // exporting all functions and use them as per their needs
 
 export {
+  DEFAULT_SERVER_CODE,
   handleAddNTasks,
   handleRemoveTask,
   getCurrentTaskList,

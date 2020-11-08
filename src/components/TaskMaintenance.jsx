@@ -19,7 +19,7 @@ export default function TaskMaintenance(props) {
 
   const handleSetNTasks = () => {
     if (numberOfTasks <= 0 || numberOfTasks === null) {
-      // update this thing to show error --> use snackbar
+      // use snackbar to show errors
       triggerError("Invalid Number of Tasks");
       return;
     }
