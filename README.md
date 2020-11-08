@@ -1,12 +1,12 @@
 # Check Hosted Link
 
-Hosted Link: [Click Here](https://taskmanager-pratik.netlify.app/) \
+Hosted Link: [Click Here](https://taskmanager-pratik.netlify.app/)
 
 # How to run task-manager locally
 
 Use this command `git clone https://github.com/pratik7368patil/task-manager.git` \
 Change directory using `cd task-manager`\
-Install Dependancies using `npm i` \
+Install Dependancies using `npm i`
 
 ### To run use this command `npm start`
 
