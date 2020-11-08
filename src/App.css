@@ -9,6 +9,7 @@
 }
 h2 {
   background: linear-gradient(#2b2b2b, #4f7bff);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
