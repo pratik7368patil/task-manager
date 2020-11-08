@@ -1,12 +1,14 @@
-# Getting Started with Create React App
+# Check Hosted Link
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Hosted Link: [Click Here](https://taskmanager-pratik.netlify.app/) \
 
-## Available Scripts
+# How to run task-manager locally
 
-In the project directory, you can run:
+Use this command `git clone https://github.com/pratik7368patil/task-manager.git` \
+Change directory using `cd task-manager`\
+Install Dependancies using `npm i` \
 
-### `npm start`
+### To run use this command `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
